@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOS Landing Vault</title>
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+    <header class="topbar">
+      <div class="brand">
+        <img src="./logo.svg" alt="SOS Landing Vault" class="brand__logo" />
+        <div class="brand__titles">
+          <span class="brand__name">SOS Landing Vault</span>
+          <span class="brand__tag">אחסון מדיה בחינם</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="תפריט ראשי">
+        <button class="menu__item" data-modal="how">איך משתמשים</button>
+        <button class="menu__item" data-modal="faq">שאלות</button>
+      </nav>
+      <div class="availability" id="availabilityStatus" aria-live="polite"></div>
+    </header>
+
+    <main class="main">
+      <section class="hero">
+        <h1 class="hero__title">קבל לינק מיידי לקבצים</h1>
+        <p class="hero__subtitle">
+          העלו וידאו, אודיו או תמונה וקבלו לינק מיידי לשיתוף בכל מקום.
+        </p>
+      </section>
+
+      <section class="drop" aria-label="אזור גרירת קבצים">
+        <div class="drop__panel" id="dropZone">
+          <input type="file" id="fileInput" accept="video/*,audio/*,image/*" hidden />
+          <div class="drop__icon" aria-hidden="true">⬆</div>
+          <p class="drop__title">גררו לכאן וידאו, אודיו או תמונה</p>
+          <p class="drop__hint">MP4, WEBM, MOV, MP3, WAV, JPG, PNG ועוד</p>
+          <ul class="drop__list">
+            <li>קובץ יחיד בכל פעם</li>
+            <li>אפשר גם בחירה ידנית</li>
+            <li>וידאו נדחס בדפדפן, אודיו ותמונה עולים מיד</li>
+          </ul>
+          <button type="button" class="drop__button" id="selectButton">בחרו קובץ</button>
+        </div>
+        <div class="drop__status" id="statusBox" aria-live="assertive">
+          <span id="statusMessage"></span>
+          <progress id="progressBar" hidden></progress>
+          <span id="progressValue" hidden>0%</span>
+        </div>
+      </section>
+
+      <section class="result" id="resultPanel" hidden aria-live="polite">
+        <h2 class="result__title">הלינק מוכן</h2>
+        <div class="result__preview" id="resultPreview"></div>
+        <ul class="result__list" id="resultList"></ul>
+        <button type="button" class="result__copy" id="copyButton">העתיקו קישור</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__primary">
+        <span>© SOS Landing Vault</span>
+        <span>זמינות גבוהה: 99.1%</span>
+      </div>
+      <nav class="footer__links" aria-label="קישורי מידע">
+        <a href="#" class="footer__link">תנאי שימוש</a>
+        <a href="#" class="footer__link">מדיניות פרטיות</a>
+        <a href="#" class="footer__link">אחריות לתוכן</a>
+      </nav>
+    </footer>
+
+    <div class="modal" id="howModal" style="display:none" hidden>
+      <div class="modal__backdrop" data-modal="how"></div>
+      <div class="modal__content">
+        <button class="modal__close" data-modal="how">&times;</button>
+        <h2 class="info__title">איך משתמשים?</h2>
+        <ol class="steps">
+          <li>העלו קובץ בודד (וידאו עד 30MB).</li>
+          <li>גררו אותו לממשק או בחרו ידנית.</li>
+          <li>וידאו יעבור דחיסה אוטומטית.</li>
+          <li>קבלו לינק מיידי לשיתוף.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="modal" id="faqModal" style="display:none" hidden>
+      <div class="modal__backdrop" data-modal="faq"></div>
+      <div class="modal__content">
+        <button class="modal__close" data-modal="faq">&times;</button>
+        <h2 class="info__title">שאלות נפוצות</h2>
+        <details>
+          <summary>כמה זמן הקישור נשאר פעיל?</summary>
+          <p>הקבצים נשמרים לפחות שבעה ימים, ולעיתים אף יותר משלושים יום ברציפות.</p>
+        </details>
+        <details>
+          <summary>מה קורה אם השירות לא מגיב?</summary>
+          <p>נציג הודעת כשל ותוכלו לנסות שוב או לשמור את הקובץ המקומי שנוצר.</p>
+        </details>
+        <details>
+          <summary>האם אפשר לעדכן את התוכן לאחר ההעלאה?</summary>
+          <p>כל העלאה יוצרת קישור חדש. אפשר להריץ שוב את הממשק לקבלת גרסה מעודכנת.</p>
+        </details>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js" defer></script>
+    <script src="../config.js" defer></script>
+    <script src="../key-utils.js" defer></script>
+    <script src="../utils.js" defer></script>
+    <script src="../secure-channel.js" defer></script>
+    <script src="../keys.js" defer></script>
+    <script src="../blossom.js" defer></script>
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
+    <script src="../video-compressor.js" defer></script>
+    <script src="./uploader.js" defer></script>
+  </body>
+</html>
