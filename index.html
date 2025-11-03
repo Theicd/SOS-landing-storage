@@ -31,7 +31,6 @@
         <button class="menu__item" data-modal="how">איך משתמשים</button>
         <button class="menu__item" data-modal="faq">שאלות</button>
       </nav>
-      <div class="availability" id="availabilityStatus" aria-live="polite"></div>
     </header>
 
     <main class="main">
@@ -51,7 +50,6 @@
           <ul class="drop__list">
             <li>קובץ יחיד בכל פעם</li>
             <li>אפשר גם בחירה ידנית</li>
-            <li>וידאו נדחס בדפדפן, אודיו ותמונה עולים מיד</li>
           </ul>
           <button type="button" class="drop__button" id="selectButton">בחרו קובץ</button>
         </div>
@@ -59,6 +57,14 @@
           <span id="statusMessage"></span>
           <progress id="progressBar" hidden></progress>
           <span id="progressValue" hidden>0%</span>
+          <div class="status__override" id="overridePanel" hidden>
+            <label for="overrideInput">יש לכם קוד ביטול?</label>
+            <div class="status__override-row">
+              <input type="password" id="overrideInput" inputmode="numeric" maxlength="4" placeholder="******" />
+              <button type="button" id="overrideButton">אישור</button>
+            </div>
+            <small id="overrideMessage"></small>
+          </div>
         </div>
       </section>
 
@@ -76,43 +82,120 @@
         <span>זמינות גבוהה: 99.1%</span>
       </div>
       <nav class="footer__links" aria-label="קישורי מידע">
-        <a href="#" class="footer__link">תנאי שימוש</a>
-        <a href="#" class="footer__link">מדיניות פרטיות</a>
-        <a href="#" class="footer__link">אחריות לתוכן</a>
+        <a href="#" class="footer__link" data-modal="terms">תנאי שימוש</a>
+        <a href="#" class="footer__link" data-modal="privacy">מדיניות פרטיות</a>
       </nav>
     </footer>
 
     <div class="modal" id="howModal" style="display:none" hidden>
       <div class="modal__backdrop" data-modal="how"></div>
-      <div class="modal__content">
+      <div class="modal__content modal__card">
         <button class="modal__close" data-modal="how">&times;</button>
-        <h2 class="info__title">איך משתמשים?</h2>
-        <ol class="steps">
-          <li>העלו קובץ בודד (וידאו עד 30MB).</li>
-          <li>גררו אותו לממשק או בחרו ידנית.</li>
-          <li>וידאו יעבור דחיסה אוטומטית.</li>
-          <li>קבלו לינק מיידי לשיתוף.</li>
+        <div class="modal__hero">
+          <span class="modal__emoji">🎬</span>
+        </div>
+        <h2 class="modal__title">איך משתמשים?</h2>
+        <p class="modal__subtitle">תהליך העלאה קצר שמייצר לכם לינק נוצץ לשיתוף מידי.</p>
+        <ol class="modal__list modal__list--numbered">
+          <li>
+            <span class="modal__list-title">בחרו קובץ יחיד</span>
+            <span class="modal__list-text">וידאו עד 30MB, קובץ אודיו איכותי או תמונה מוגדלת.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">גררו או בחרו ידנית</span>
+            <span class="modal__list-text">האזור הראשי מזהה מיד את הקובץ ומכין אותו לרשת.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">צפו במד ההתקדמות</span>
+            <span class="modal__list-text">וידאו נדחס, אודיו ותמונה עולים כפי שהם ותמיד תשמר שקיפות מלאה.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">קבלו לינק מיידי</span>
+            <span class="modal__list-text">תצוגה מקדימה מהודרת עם כפתור העתקה אחד שמוכן לכל שיתוף.</span>
+          </li>
         </ol>
+        <div class="modal__hint">💡 טיפ: לאחר ההעלאה אפשר לשמור את כתובת הקובץ ולשתף אותה בכל ערוץ שתרצו.</div>
       </div>
     </div>
 
     <div class="modal" id="faqModal" style="display:none" hidden>
       <div class="modal__backdrop" data-modal="faq"></div>
-      <div class="modal__content">
+      <div class="modal__content modal__card">
         <button class="modal__close" data-modal="faq">&times;</button>
-        <h2 class="info__title">שאלות נפוצות</h2>
-        <details>
-          <summary>כמה זמן הקישור נשאר פעיל?</summary>
-          <p>הקבצים נשמרים לפחות שבעה ימים, ולעיתים אף יותר משלושים יום ברציפות.</p>
-        </details>
-        <details>
-          <summary>מה קורה אם השירות לא מגיב?</summary>
-          <p>נציג הודעת כשל ותוכלו לנסות שוב או לשמור את הקובץ המקומי שנוצר.</p>
-        </details>
-        <details>
-          <summary>האם אפשר לעדכן את התוכן לאחר ההעלאה?</summary>
-          <p>כל העלאה יוצרת קישור חדש. אפשר להריץ שוב את הממשק לקבלת גרסה מעודכנת.</p>
-        </details>
+        <div class="modal__hero modal__hero--alt">
+          <span class="modal__emoji">💡</span>
+        </div>
+        <h2 class="modal__title">שאלות נפוצות</h2>
+        <p class="modal__subtitle">כל מה שצריך לדעת לפני שמתחילים לשתף מדיה עם SOS Landing Vault.</p>
+        <ul class="modal__list">
+          <li>
+            <span class="modal__list-title">כמה זמן התוכן נשמר?</span>
+            <span class="modal__list-text">קבצים נשמרים לפחות שבעה ימים ולעיתים אף למעלה מחודש, בהתאם לעומס השירות.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">מה אם השרת לא מגיב?</span>
+            <span class="modal__list-text">נציג הודעת כשל, תנסו מחדש או שמרו את הקובץ ההדחוס מקומית והעלו שוב מאוחר יותר.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">אפשר לערוך תוכן שכבר הועלה?</span>
+            <span class="modal__list-text">כל העלאה מייצרת לינק חדש. פשוט העלו גרסה מעודכנת וקבלו כתובת רעננה לשיתוף.</span>
+          </li>
+        </ul>
+        <div class="modal__hint">📬 אם תרצו להסיר קובץ ששותף, העלו גרסה חדשה או מחקו אותו דרך שירות האחסון שבו השתמשתם.</div>
+      </div>
+    </div>
+
+    <div class="modal" id="termsModal" style="display:none" hidden>
+      <div class="modal__backdrop" data-modal="terms"></div>
+      <div class="modal__content modal__card">
+        <button class="modal__close" data-modal="terms">&times;</button>
+        <div class="modal__hero">
+          <span class="modal__emoji">📝</span>
+        </div>
+        <h2 class="modal__title">תנאי שימוש</h2>
+        <p class="modal__subtitle">הכלי פתוח לשימוש חינמי לצורך הדגמה ושיתוף מהיר של מדיה.</p>
+        <ul class="modal__list">
+          <li>
+            <span class="modal__list-title">ללא הרשמה וללא גביית תשלום</span>
+            <span class="modal__list-text">הממשק פועל כעמוד סטטי ונועד להמחשה בלבד. איננו מספקים אחריות על זמינות, ביצועים או תוצאה של ההעלאות.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">שימוש הוגן ומוסרי</span>
+            <span class="modal__list-text">אנא אל תעלו חומרים פוגעניים, בלתי חוקיים או כאלה שמפרים זכויות יוצרים. השימוש במערכת הוא על אחריותכם בלבד.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">קישורים זמניים</span>
+            <span class="modal__list-text">הקישורים מסופקים כתוצאה מהעלאה לשירות צד שלישי. יתכן שהקבצים יימחקו ללא הודעה מוקדמת.</span>
+          </li>
+        </ul>
+        <div class="modal__hint">ℹ️ זוהי הדגמה של ממשק העלאה סטטי. אין תמיכה בפתיחת חשבון או בבקשות שירות.</div>
+      </div>
+    </div>
+
+    <div class="modal" id="privacyModal" style="display:none" hidden>
+      <div class="modal__backdrop" data-modal="privacy"></div>
+      <div class="modal__content modal__card">
+        <button class="modal__close" data-modal="privacy">&times;</button>
+        <div class="modal__hero modal__hero--alt">
+          <span class="modal__emoji">🔒</span>
+        </div>
+        <h2 class="modal__title">מדיניות פרטיות</h2>
+        <p class="modal__subtitle">המערכת רצה כעמוד סטטי ב-GitHub Pages ואינה אוספת מידע משתמש.</p>
+        <ul class="modal__list">
+          <li>
+            <span class="modal__list-title">ללא קובצי Cookie או מעקב</span>
+            <span class="modal__list-text">אין מנגנוני ניתוח, אין טפסים ואין שמירת מידע אישי. הכל נשאר בצד המשתמש.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">העלאות מתקיימות ישירות מול Blossom או void.cat</span>
+            <span class="modal__list-text">שירותי האחסון החיצוניים עשויים לשמור נתונים לפי תנאיהם. מומלץ לבדוק את המדיניות שלהם אם זה קריטי לכם.</span>
+          </li>
+          <li>
+            <span class="modal__list-title">הסרת תכנים</span>
+            <span class="modal__list-text">אם נדרש להסיר תוכן שהועלה, פנו לשירות האחסון הרלוונטי עם כתובת הקובץ. כלי זה אינו מחזיק רשימות או שליטה על הקבצים לאחר ההעלאה.</span>
+          </li>
+        </ul>
+        <div class="modal__hint">🔍 אין לנו יכולת לזהות משתמשים או לעקוב אחר פעילות. כל שימוש במערכת הוא אנונימי מצד הממשק.</div>
       </div>
     </div>
 

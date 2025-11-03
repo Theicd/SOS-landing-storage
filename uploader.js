@@ -14,9 +14,25 @@
   const backButton = document.getElementById('backButton');
   const body = document.body;
   const availabilityStatus = document.getElementById('availabilityStatus');
+  const overridePanel = document.getElementById('overridePanel');
+  const overrideInput = document.getElementById('overrideInput');
+  const overrideButton = document.getElementById('overrideButton');
+  const overrideMessage = document.getElementById('overrideMessage');
+  const uploadCountKey = 'sos_upload_count';
+  const uploadOverrideKey = 'sos_upload_override';
+  const uploadLimit = 10;
+  let uploadCount = 0;
+  let uploadLimitUnlocked = false;
+  try{ 
+    uploadCount = parseInt(localStorage.getItem(uploadCountKey), 10) || 0; 
+    uploadLimitUnlocked = localStorage.getItem(uploadOverrideKey) === '1'; 
+  }catch{}
 
   async function checkAvailability(){
-    availabilityStatus.textContent = 'מוכן להעלאה';
+    if(availabilityStatus){
+      availabilityStatus.textContent = '';
+      availabilityStatus.hidden = true;
+    }
   }
 
   function updateStatus(msg, isError, keepProgress){
@@ -254,6 +270,21 @@
       updateStatus('לא נבחר וידאו.', true);
       return;
     }
+    if(!uploadLimitUnlocked && uploadCount >= uploadLimit){
+      updateStatus('הגעתם למגבלת 10 הקבצים בדפדפן הזה. הזינו קוד ביטול אם ברשותכם.', true);
+      if(overridePanel){
+        overridePanel.hidden = false;
+        if(overrideMessage){
+          overrideMessage.textContent = '';
+          overrideMessage.style.color = 'rgba(226,236,255,.78)';
+        }
+        if(overrideInput){
+          overrideInput.value = '';
+          overrideInput.focus();
+        }
+      }
+      return;
+    }
 
     const isVideo = file.type.startsWith('video/');
     const isImage = file.type.startsWith('image/');
@@ -332,6 +363,10 @@
       updateProgressDisplay(totalBytes, totalBytes, false);
 
       presentResult(file, url, file.name || typeLabel);
+      if(!uploadLimitUnlocked){
+        uploadCount += 1;
+        try{ localStorage.setItem(uploadCountKey, String(uploadCount)); }catch{}
+      }
       updateStatus(`${typeLabel} עלתה בהצלחה.`, false);
       setTimeout(()=>{
         progressBar.hidden = true;
@@ -362,6 +397,32 @@
         updateStatus('השרת לא החזיר כתובת. בדקו את הקובץ ונסו שוב.', true);
       }else{
         updateStatus('אירעה שגיאה. נסו קובץ אחר או רעננו את העמוד.', true);
+      }
+    }
+  }
+
+  function attemptOverride(){
+    if(!overrideInput) return;
+    const code = (overrideInput.value || '').trim();
+    if(code === '2048'){
+      uploadLimitUnlocked = true;
+      uploadCount = 0;
+      try{
+        localStorage.setItem(uploadOverrideKey, '1');
+        localStorage.removeItem(uploadCountKey);
+      }catch{}
+      if(overridePanel){
+        overridePanel.hidden = true;
+      }
+      if(overrideMessage){
+        overrideMessage.textContent = 'המגבלה הוסרה. ניתן להמשיך להעלות קבצים ללא הגבלה.';
+        overrideMessage.style.color = '#7fffd4';
+      }
+      updateStatus('המגבלה הוסרה. ניתן להמשיך להעלות קבצים.', false);
+    }else{
+      if(overrideMessage){
+        overrideMessage.textContent = 'קוד לא תקין. נסו שוב.';
+        overrideMessage.style.color = '#ff8f8f';
       }
     }
   }
@@ -401,6 +462,19 @@
     resetResult();
     updateStatus('בחרו קובץ חדש להעלאה.', false);
   });
+
+  overrideButton?.addEventListener('click', attemptOverride);
+  overrideInput?.addEventListener('keydown', (event)=>{
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      attemptOverride();
+    }
+  });
+
+  if(uploadLimitUnlocked){
+    try{ localStorage.setItem(uploadOverrideKey, '1'); }catch{}
+    if(overridePanel){ overridePanel.hidden = true; }
+  }
 
   checkAvailability();
 })(document, window);
