@@ -16,7 +16,10 @@
   const availabilityStatus = document.getElementById('availabilityStatus');
 
   async function checkAvailability(){
-    availabilityStatus.textContent = 'מוכן להעלאה';
+    if(availabilityStatus){
+      availabilityStatus.textContent = '';
+      availabilityStatus.hidden = true;
+    }
   }
 
   function updateStatus(msg, isError, keepProgress){
@@ -169,7 +172,7 @@
         if(typeof onProgress === 'function'){
           syntheticValue = 0;
           syntheticTimer = setInterval(()=>{
-            syntheticValue = Math.min(95, syntheticValue + 4);
+            syntheticValue = Math.min(98, syntheticValue + 4);
             onProgress(syntheticValue, 100, true);
           }, 450);
         }
@@ -318,7 +321,13 @@
           progressValue.hidden = false;
           progressValue.textContent = `${percent}%`;
         }
-        updateStatus(`מעלה ${typeLabel}...`, false, true);
+        if(synthetic){
+          updateStatus(`מעלה ${typeLabel} דרך אפליקציה...`, false, true);
+        }else if(percent >= 97){
+          updateStatus('מסיים יצירת הקישור...', false, true);
+        }else{
+          updateStatus(`מעלה ${typeLabel}...`, false, true);
+        }
       };
 
       updateProgressDisplay(0, totalBytes, false);
@@ -332,7 +341,11 @@
       updateProgressDisplay(totalBytes, totalBytes, false);
 
       presentResult(file, url, file.name || typeLabel);
-      updateStatus(`${typeLabel} עלתה בהצלחה.`, false);
+      if(typeLabel === 'וידאו'){
+        updateStatus('וידיאו עלה בהצלחה.', false);
+      }else{
+        updateStatus(`${typeLabel} עלה בהצלחה.`, false);
+      }
       setTimeout(()=>{
         progressBar.hidden = true;
         progressBar.removeAttribute('value');
@@ -403,20 +416,50 @@
   });
 
   checkAvailability();
-})(document, window);
+
+  })(document, window);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const menuItems = document.querySelectorAll('.menu__item, .bottom-menu__item');
+  const menuItems = document.querySelectorAll('.menu__item, .bottom-menu__item, .footer__link[data-modal]');
   const modals = document.querySelectorAll('.modal');
   const closeButtons = document.querySelectorAll('.modal__close');
   const backdrops = document.querySelectorAll('.modal__backdrop');
   const bottomToggle = document.getElementById('bottomToggle');
   const bottomMenu = document.getElementById('bottomMenu');
+  const audioToggle = document.getElementById('musicToggle');
+  const bgAudio = document.getElementById('bgAudio');
+  const cornerLights = document.querySelector('.corner-lights');
+  const dropPanelMain = document.querySelector('.drop__panel');
+
+  if(bgAudio){
+    bgAudio.volume = 0.4;
+  }
+
+  const setAudioVisualState = (isActive)=>{
+    if(cornerLights){
+      cornerLights.classList.toggle('active', !!isActive);
+    }
+    if(dropPanelMain){
+      dropPanelMain.classList.toggle('glow', !!isActive);
+    }
+    if(audioToggle){
+      audioToggle.classList.toggle('music-toggle--active', !!isActive);
+      audioToggle.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      audioToggle.textContent = isActive ? '⏸ עצור נגינה' : '🎵 נגינת רקע';
+    }
+  };
+
+  if(bgAudio){
+    bgAudio.addEventListener('play', ()=> setAudioVisualState(true));
+    bgAudio.addEventListener('pause', ()=> setAudioVisualState(false));
+    bgAudio.addEventListener('ended', ()=> setAudioVisualState(false));
+  }
 
   menuItems.forEach(button => {
     button.addEventListener('click', () => {
-      const modalId = button.dataset.modal + 'Modal';
+      const modalId = `${button.dataset.modal}Modal`;
       const modal = document.getElementById(modalId);
+      if(!modal) return;
       modal.hidden = false;
       modal.style.display = 'flex';
       modal.querySelector('.modal__content').style.transform = 'scale(1)';
@@ -425,8 +468,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   closeButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const modalId = button.dataset.modal + 'Modal';
+      const modalId = `${button.dataset.modal}Modal`;
       const modal = document.getElementById(modalId);
+      if(!modal) return;
       modal.hidden = true;
       modal.style.display = 'none';
     });
@@ -434,24 +478,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   backdrops.forEach(backdrop => {
     backdrop.addEventListener('click', () => {
-      const modalId = backdrop.dataset.modal + 'Modal';
+      const modalId = `${backdrop.dataset.modal}Modal`;
       const modal = document.getElementById(modalId);
+      if(!modal) return;
       modal.hidden = true;
       modal.style.display = 'none';
     });
   });
 
-  bottomToggle.addEventListener('click', () => {
-    const isOpen = bottomMenu.classList.contains('open');
-    const toggleIcon = bottomToggle.querySelector('.toggle-icon');
-    if (isOpen) {
-      bottomMenu.classList.remove('open');
-      bottomToggle.classList.remove('active');
-      toggleIcon.textContent = '▲';
-    } else {
-      bottomMenu.classList.add('open');
-      bottomToggle.classList.add('active');
-      toggleIcon.textContent = '✕';
-    }
-  });
+  if(bottomToggle && bottomMenu){
+    bottomToggle.addEventListener('click', () => {
+      const isOpen = bottomMenu.classList.contains('open');
+      const toggleIcon = bottomToggle.querySelector('.toggle-icon');
+      if(isOpen){
+        bottomMenu.classList.remove('open');
+        bottomToggle.classList.remove('active');
+        if(toggleIcon) toggleIcon.textContent = '▲';
+      }else{
+        bottomMenu.classList.add('open');
+        bottomToggle.classList.add('active');
+        if(toggleIcon) toggleIcon.textContent = '✕';
+      }
+    });
+  }
+
+  if(audioToggle && bgAudio){
+    audioToggle.addEventListener('click', async ()=>{
+      try{
+        if(bgAudio.paused){
+          await bgAudio.play();
+        }else{
+          bgAudio.pause();
+        }
+      }catch(err){
+        console.warn('audio-toggle-failed', err);
+      }
+    });
+  }else if(audioToggle){
+    // במידה ואין אודיו נטען, ודא שהכפתור מסמן מצב כבוי
+    setAudioVisualState(false);
+  }
 });
