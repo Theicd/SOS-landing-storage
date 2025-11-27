@@ -1,0 +1,350 @@
+{
+  "timestamp": 1764231649.4498777,
+  "alive": [
+    {
+      "url": "https://blossom.band",
+      "pubkey": "npub1blossomserver",
+      "ok": true,
+      "note": "HEAD 401 (דורש auth - תקין)",
+      "response_time": 0.05567789077758789
+    },
+    {
+      "url": "https://nostr.net/\\",
+      "pubkey": "",
+      "ok": true,
+      "note": "OPTIONS 405",
+      "response_time": 0.10431075096130371
+    },
+    {
+      "url": "https://nostr.net/",
+      "pubkey": "",
+      "ok": true,
+      "note": "OPTIONS 405",
+      "response_time": 0.1069481372833252
+    },
+    {
+      "url": "https://nostr.net/\\u003c/a\\u003e.\\u003c/p\\u003e\\n\\u003cdiv",
+      "pubkey": "",
+      "ok": true,
+      "note": "OPTIONS 405",
+      "response_time": 0.10751509666442871
+    },
+    {
+      "url": "https://jsr.io/@nostrify/nostrify/doc/uploaders/~/BlossomUploader",
+      "pubkey": "",
+      "ok": true,
+      "note": "OPTIONS 405",
+      "response_time": 0.1202249526977539
+    },
+    {
+      "url": "https://jsr.io/@nostrify/nostrify/doc/uploaders/~/BlossomUploader)",
+      "pubkey": "",
+      "ok": true,
+      "note": "OPTIONS 405",
+      "response_time": 0.13010025024414062
+    },
+    {
+      "url": "https://opengraph.githubassets.com/f3ae0ad62d4adbbfb81148ecb353533550c69175a3ce0dfeb12cffdcaa240f4c/hzrd149/blossom",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.17258119583129883
+    },
+    {
+      "url": "https://blossom.primal.net/",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 401 (דורש auth - תקין)",
+      "response_time": 0.2545027732849121
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nostr",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.3045976161956787
+    },
+    {
+      "url": "https://github.com/hzrd149/blossom",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.317929744720459
+    },
+    {
+      "url": "https://blossom.primal.net",
+      "pubkey": "npub1primal",
+      "ok": true,
+      "note": "HEAD 401 (דורש auth - תקין)",
+      "response_time": 0.34967660903930664
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nips",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.38204216957092285
+    },
+    {
+      "url": "https://blossom.nostr.build",
+      "pubkey": "npub1nostrbuild",
+      "ok": true,
+      "note": "HEAD 401 (דורש auth - תקין)",
+      "response_time": 0.4901089668273926
+    },
+    {
+      "url": "https://nostrify.dev",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.638211727142334
+    },
+    {
+      "url": "https://nostr.build",
+      "pubkey": "npub1nostrbuild",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.8291342258453369
+    },
+    {
+      "url": "https://gitlab.com/soapbox-pub/nostrify-docs/-/blob/main/:path\\",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.866379976272583
+    },
+    {
+      "url": "https://gitlab.com/soapbox-pub/nostrify-docs/-/blob/main/upload/blossom.md",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 0.945392370223999
+    },
+    {
+      "url": "https://how-nostr-works.pages.dev/",
+      "pubkey": "",
+      "ok": true,
+      "note": "HEAD 200 (פעיל)",
+      "response_time": 2.0422468185424805
+    }
+  ],
+  "dead": [
+    {
+      "url": "https://blossom.nostr.wine",
+      "pubkey": "npub1wine",
+      "ok": false,
+      "note": "חריגה: HTTPSConnectionPool(host='blos",
+      "response_time": 0.0019974708557128906
+    },
+    {
+      "url": "https://blossom.primal.net/&",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.27037644386291504
+    },
+    {
+      "url": "https://blossom.primal.net/7508bd9d8b0ed6e0891a3b973adf6011b1e49f6174910d6a1eb722a4a2e30539.png",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.23961114883422852
+    },
+    {
+      "url": "https://blossom.primal.net/7508bd9d8b0ed6e0891a3b973adf6011b1e49f6174910d6a1eb722a4a2e30539.png&",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.23688054084777832
+    },
+    {
+      "url": "https://blossom.void.cat",
+      "pubkey": "npub1voidcat",
+      "ok": false,
+      "note": "חריגה: HTTPSConnectionPool(host='blos",
+      "response_time": 0.0019690990447998047
+    },
+    {
+      "url": "https://cdn.satellite.earth",
+      "pubkey": "npub1satellite",
+      "ok": false,
+      "note": "OPTIONS 400",
+      "response_time": 0.45518016815185547
+    },
+    {
+      "url": "https://cdn.zap.stream",
+      "pubkey": "npub1zapstream",
+      "ok": false,
+      "note": "חריגה: HTTPSConnectionPool(host='cdn.",
+      "response_time": 0.003077268600463867
+    },
+    {
+      "url": "https://fiatjaf.com/nostr.html",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.3347625732421875
+    },
+    {
+      "url": "https://fiatjaf.com/nostr.html\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.2755091190338135
+    },
+    {
+      "url": "https://fiatjaf.com/nostr.html\\u003c/a\\u003e",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.21707534790039062
+    },
+    {
+      "url": "https://files.nostr.band",
+      "pubkey": "npub1band",
+      "ok": false,
+      "note": "חריגה: HTTPSConnectionPool(host='file",
+      "response_time": 0.0019919872283935547
+    },
+    {
+      "url": "https://github.com/hzrd149/blossom&quot;,&quot;user_id&quot;:null}}",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.23682188987731934
+    },
+    {
+      "url": "https://github.com/hzrd149/blossom)",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.2539632320404053
+    },
+    {
+      "url": "https://github.com/hzrd149/blossom.git",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.21866321563720703
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nips/blob/master/01.md",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.2398221492767334
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nips/blob/master/01.md\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.26749706268310547
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nips/blob/master/94.md",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.2527763843536377
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nips\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.4836001396179199
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nostr&quot;,&quot;user_id&quot;:null}}",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.3717360496520996
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nostr.git",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.28084492683410645
+    },
+    {
+      "url": "https://github.com/nostr-protocol/nostr\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.4434795379638672
+    },
+    {
+      "url": "https://gitlab.com/soapbox-pub/nostrify",
+      "pubkey": "",
+      "ok": false,
+      "note": "HEAD 403",
+      "response_time": 0.32056593894958496
+    },
+    {
+      "url": "https://gitlab.com/soapbox-pub/nostrify.git",
+      "pubkey": "",
+      "ok": false,
+      "note": "HEAD 403",
+      "response_time": 0.29230499267578125
+    },
+    {
+      "url": "https://gitlab.com/soapbox-pub/nostrify\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "HEAD 403",
+      "response_time": 0.2994875907897949
+    },
+    {
+      "url": "https://jsr.io/@nostrify/nostrify",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.1290278434753418
+    },
+    {
+      "url": "https://jsr.io/@nostrify/nostrify\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.12459707260131836
+    },
+    {
+      "url": "https://nostrapps.com/",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.23037457466125488
+    },
+    {
+      "url": "https://nostrapps.com/\\",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.20874810218811035
+    },
+    {
+      "url": "https://nostrapps.com/\\u003c/a\\u003e.\\u003c/p\\u003e\\n\\u003cp",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.20485687255859375
+    },
+    {
+      "url": "https://nostrify.dev/banner.png",
+      "pubkey": "",
+      "ok": false,
+      "note": "OPTIONS 404",
+      "response_time": 0.22201085090637207
+    },
+    {
+      "url": "https://opengraph.githubassets.com/6d72759d2933897b8a777fc19ba75e21bde51b290efaf39fbf574ba01c54fed7/nostr-protocol/nostr",
+      "pubkey": "",
+      "ok": false,
+      "note": "HEAD 429",
+      "response_time": 1.357654094696045
+    }
+  ]
+}
